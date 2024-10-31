@@ -26,7 +26,11 @@ function throwHand(string){
         case "s":
         case "scissors":
             handVal = 3;
+            break;
 
+        default:
+            console.log("incorrect value")
+            return false;
     }
 
     return handVal;
@@ -34,4 +38,29 @@ function throwHand(string){
 
 function chooseHand() {
     return Math.ceil(Math.random() * 3)
+}
+
+function makeHand(number){
+    switch (number){
+        case 1:
+            return "rock"
+        case 2:
+            return "paper"
+        case 3:
+            return "scissors"
+    }
+    
+}
+
+function play(choice){
+    let playerChoice = throwHand(choice)
+    let computerChoice = chooseHand()
+    if (!playerChoice) return "Please give either (r)ock, (p)aper or (s)cissors to the play() function"
+    let playerHand;
+    let computerHand;
+
+
+    if ( playerChoice == computerChoice){
+        return playerChoice + " VS " + computerChoice + " A tie!"
+    }
 }
