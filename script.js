@@ -6,7 +6,7 @@ function throwHand(string){
     
     if (typeof string !== typeof "a")
     {
-        console.error("La valeur passé n'est pas une chaine de charatères")
+        console.error("The value is not a string")
         return false;
     }
     hand = string.toLowerCase()
@@ -30,4 +30,8 @@ function throwHand(string){
     }
 
     return handVal;
+}
+
+function chooseHand() {
+    return Math.ceil(Math.random() * 3)
 }
