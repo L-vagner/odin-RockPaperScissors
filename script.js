@@ -1,4 +1,4 @@
-console.log("Hello World!")
+console.log("Hello \nUse the play() function in the console to play\n(r)ock, (p)aper and (s)cisors are accepted")
 
 function throwHand(string){
     let hand;
@@ -56,11 +56,30 @@ function play(choice){
     let playerChoice = throwHand(choice)
     let computerChoice = chooseHand()
     if (!playerChoice) return "Please give either (r)ock, (p)aper or (s)cissors to the play() function"
-    let playerHand;
-    let computerHand;
+    let playerHand = makeHand(playerChoice);
+    let computerHand = makeHand(computerChoice);
 
 
     if ( playerChoice == computerChoice){
-        return playerChoice + " VS " + computerChoice + " A tie!"
+        return playerHand + " VS " + computerHand + " A tie!"
+    }
+    switch (playerChoice){
+        case 1:
+            if (computerChoice == 3){
+                return playerHand + " VS " + computerHand + " You win!"
+            }
+            return playerHand + " VS " + computerHand + " You lose!"
+        
+        case 2:
+            if (computerChoice == 1){
+                return playerHand + " VS " + computerHand + " You win!"
+            }
+            return playerHand + " VS " + computerHand + " You lose!"
+        
+        case 3:
+            if (computerChoice == 2){
+                return playerHand + " VS " + computerHand + " You win!"
+            }
+            return playerHand + " VS " + computerHand + " You lose!"
     }
 }
