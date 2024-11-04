@@ -1,85 +1,83 @@
-console.log("Hello \nUse the play() function in the console to play\n(r)ock, (p)aper and (s)cisors are accepted")
+console.log("Hello \nUse the playGame() function in the console to play\nrock, paper scissors")
 
-function throwHand(string){
-    let hand;
-    let handVal;
+function getHumanChoice(){
+    let hand = prompt("Make a choice for rock, paper, scissors", "");
     
-    if (typeof string !== typeof "a")
+    if (typeof hand !== typeof "a")
     {
         console.error("The value is not a string")
         return false;
     }
-    hand = string.toLowerCase()
+    hand = hand.toLowerCase()
 
-    switch (hand){
-
-        case "r":
-        case "rock":
-            handVal = 1;
-            break;
-
-        case "p":
-        case "paper":
-            handVal = 2;
-            break;
-        
-        case "s":
-        case "scissors":
-            handVal = 3;
-            break;
-
-        default:
-            console.log("incorrect value")
-            return false;
+    return hand;
     }
 
-    return handVal;
-}
 
-function chooseHand() {
-    return Math.ceil(Math.random() * 3)
-}
-
-function makeHand(number){
-    switch (number){
+function getComputerChoice() {
+    let random = Math.ceil(Math.random() * 3)
+    switch (random){
         case 1:
             return "rock"
+
         case 2:
             return "paper"
+
         case 3:
             return "scissors"
     }
-    
 }
 
-function play(choice){
-    let playerChoice = throwHand(choice)
-    let computerChoice = chooseHand()
-    if (!playerChoice) return "Please give either (r)ock, (p)aper or (s)cissors to the play() function"
-    let playerHand = makeHand(playerChoice);
-    let computerHand = makeHand(computerChoice);
+function playGame(){
 
+    let humanScore = 0;
+    let computerScore = 0;
 
-    if ( playerChoice == computerChoice){
-        return playerHand + " VS " + computerHand + " A tie!"
+    function playRound(){
+        let humanChoice = getHumanChoice()
+        let computerChoice = getComputerChoice()
+        if (!humanChoice) return "Please give either rock, paper or scissors to the playRound() function"
+    
+        if ( humanChoice == computerChoice){
+            return humanChoice + " VS " + computerChoice + " A tie!"
+        }
+        switch (humanChoice){
+            case "rock":
+                if (computerChoice == "scissors"){
+                    humanScore++;
+                    return humanChoice + " VS " + computerChoice + " You win!"
+                    
+                }
+                computerScore++;
+                return humanChoice + " VS " + computerChoice + " You lose!"
+            
+            case "paper":
+                if (computerChoice == "rock"){
+                    humanScore++;
+                    return humanChoice + " VS " + computerChoice + " You win!"
+                }
+                computerScore++;
+                return humanChoice + " VS " + computerChoice + " You lose!"
+            
+            case "scissors":
+                if (computerChoice == "paper"){
+                    humanScore++;
+                    return humanChoice + " VS " + computerChoice + " You win!"
+                }
+                computerScore++;
+                return humanChoice + " VS " + computerChoice + " You lose!"
+        }
+        return "The value you passed was incorrect"
     }
-    switch (playerChoice){
-        case 1:
-            if (computerChoice == 3){
-                return playerHand + " VS " + computerHand + " You win!"
-            }
-            return playerHand + " VS " + computerHand + " You lose!"
-        
-        case 2:
-            if (computerChoice == 1){
-                return playerHand + " VS " + computerHand + " You win!"
-            }
-            return playerHand + " VS " + computerHand + " You lose!"
-        
-        case 3:
-            if (computerChoice == 2){
-                return playerHand + " VS " + computerHand + " You win!"
-            }
-            return playerHand + " VS " + computerHand + " You lose!"
-    }
+
+    console.log(playRound())
+    console.log(playRound())
+    console.log(playRound())
+    console.log(playRound())
+    console.log(playRound())
+    
+    console.log("Player score: " + humanScore + "\nComputer score: " + computerScore)
+    if (humanScore > computerScore){
+        console.log("you win")
+    } else console.log("you lose")
 }
